@@ -4,6 +4,8 @@
     state: present
 
 - name: enable nginx
+  tags:
+  - runenable
   ansible.builtin.service:
     name: nginx
     state: started
