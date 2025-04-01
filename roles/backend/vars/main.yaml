@@ -1,2 +1,4 @@
 r_pw: ExpenseApp@1
 mysql_host: mysql.katta.blog
+app_location: /app
+cmp: backend
