@@ -20,7 +20,7 @@
 - name: Get MySQL version with non-default credentials
   community.mysql.mysql_info:
     login_user: root
-    login_password: "{{ r_pw }}"
+    login_password: "{{ lookup('amazon.aws.aws_ssm', '/exp/mysql/r_pw', decrypt=True ) }}"
     login_host: "{{ host_mysql }}"
   register: mysql_info
   ignore_errors: true
@@ -30,5 +30,5 @@
     msg: "Mysql info: {{mysql_info}}"
 
 - name: setup root password
-  ansible.builtin.command: "mysql_secure_installation --set-root-pass {{ r_pw }}"
+  ansible.builtin.command: "mysql_secure_installation --set-root-pass {{ lookup('amazon.aws.aws_ssm', '/exp/mysql/r_pw', decrypt=True }}"
   when: mysql_info.failed is true
